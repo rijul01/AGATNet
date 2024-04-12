@@ -99,9 +99,9 @@ keep_indices = [i for i in all_indices if i not in remove_indices]
 #################################### Training Data  #################################################
 
 print('#### Preparing Training data ####')
-train_input_path = '/project/ychoi2/rdimri/graph_sk/train_input_data_183.npy'# '/tng4/users/rdimri/Pearson_graph_conv1d/seoul/train_input_data_25_v4.npy'
-train_target_path = '/project/ychoi2/rdimri/graph_sk/train_target_data_183.npy'# '/tng4/users/rdimri/Pearson_graph_conv1d/seoul/train_target_data_25_v4.npy'
-train_time_path = '/project/ychoi2/rdimri/graph_sk/train_input_time_183_v3.npy'
+train_input_path = '../train_input_data_183.npy'# replace ../ with you actual path to this file
+train_target_path = '../train_target_data_183.npy'# 
+train_time_path = '../train_input_time_183_v3.npy'
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 train_dataset = MyMemmapDataset(train_input_path, train_target_path, train_time_path, keep_indices, device = device)
@@ -112,9 +112,9 @@ train_dataset = MyMemmapDataset(train_input_path, train_target_path, train_time_
 #################################### Validation Data  #################################################
 
 print('#### Preparing Validation data ####')
-val_input_path = '/project/ychoi2/rdimri/graph_sk/val_input_data_183.npy'    # '/tng4/users/rdimri/Pearson_graph_conv1d/val_input_data_25_v4.npy'
-val_target_path = '/project/ychoi2/rdimri/graph_sk/val_target_data_183.npy'
-val_time_path = '/project/ychoi2/rdimri/graph_sk/test_target_time_183_v3.npy'
+val_input_path = '../val_input_data_183.npy'    # '/tng4/users/rdimri/Pearson_graph_conv1d/val_input_data_25_v4.npy'
+val_target_path = '../val_target_data_183.npy'
+val_time_path = '../test_target_time_183_v3.npy'
 
 val_dataset = MyMemmapDataset(val_input_path, val_target_path, val_time_path, keep_indices, device = device)
 #val_dataloader = DataLoader(val_dataset, batch_size = 32, shuffle = False)
@@ -124,9 +124,9 @@ val_dataset = MyMemmapDataset(val_input_path, val_target_path, val_time_path, ke
 #################################### Test Data  #################################################
 
 print('#### Preparing Test data ####')
-test_input_path = '/project/ychoi2/rdimri/graph_sk/test_input_data_183.npy'# '/tng4/users/rdimri/Pearson_graph_conv1d/test_input_data_25_v4.npy'
-test_target_path = '/project/ychoi2/rdimri/graph_sk/test_target_data_183.npy'
-test_time_path = '/project/ychoi2/rdimri/graph_sk/test_target_time_183_v3.npy'
+test_input_path = '../test_input_data_183.npy'# '/tng4/users/rdimri/Pearson_graph_conv1d/test_input_data_25_v4.npy'
+test_target_path = '../graph_sk/test_target_data_183.npy'
+test_time_path = '../test_target_time_183_v3.npy'
 
 test_dataset = MyMemmapDataset(test_input_path, test_target_path, test_time_path, keep_indices, device = device)
 #test_dataloader = DataLoader(test_dataset, batch_size = 32, shuffle = False)
@@ -572,10 +572,10 @@ def main(num_epochs, model, criterion2, optimizer, device):  # train_dataloader,
         if test_loss < best_test_loss:
             best_test_loss = test_loss
             early_stopping_counter = 0
-            torch.save(model.state_dict(), '/project/ychoi2/rdimri/graph_sk/reduced_var/pear_graph_temporal.pth')
+            torch.save(model.state_dict(), '../pear_graph_temporal.pth')
             # np.save('/tng4/users/rdimri/Pearson_graph_conv1d/seoul/attention_25_v2_0.npy', attention_outputs)
-            np.save('/project/ychoi2/rdimri/graph_sk/reduced_var/test_predict_183.npy', pred)
-            np.save('/project/ychoi2/rdimri/graph_sk/reduced_var/test_label_183.npy', label)
+            np.save('../test_predict_183.npy', pred)
+            np.save('../reduced_var/test_label_183.npy', label)
             #np.save('/project/ychoi2/rdimri/graph_sk/reduced_var/val_predict_183.npy', predv)
             #np.save('/project/ychoi2/rdimri/graph_sk/reduced_var/val_label_183.npy', labelv)
         else:
