@@ -24,3 +24,4 @@ The following scripts are provided:
 
 ## Getting started :
 To ensure the reproducibility of the results, we suggest using the `environment.yml` file when creating an environment.
+Also, the evaluation data and initial model data is available at https://zenodo.org/records/10963116
